@@ -1,16 +1,16 @@
-class UsersController < ApplicationController
+class ProfilesController < ApplicationController
+  before_action :set_user
   def show
-    @user = User.find(params[:id])
+    
   end
   def edit
     
   end
 
   def update
-    @user = User.find_by(user_name: params[:user_name])
     if @user.update(profile_params)
       flash[:success] = 'Your profile has been updated.'
-      redirect_to profile_path(@user.user_name)
+      redirect_to profile_path(@user.id)
     else
       @user.errors.full_messages
       flash[:error] = @user.errors.full_messages
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   end
 
   private
-  
+
   def set_user
     @user = User.find(params[:id])
   end
